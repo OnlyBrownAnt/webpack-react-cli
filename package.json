@@ -1,5 +1,5 @@
 {
-  "name": "webpack-react",
+  "name": "webpack-react-cli",
   "version": "1.0.0",
   "description": "",
   "private": "true",
@@ -7,7 +7,8 @@
     "dev": "cross-env NODE_ENV=development REACT_APP_ENV=dev webpack serve --config webpack/webpack.dev.js",
     "build:prod": "cross-env NODE_ENV=production REACT_APP_ENV=prod webpack --config webpack/webpack.prod.js",
     "build:sit": "cross-env NODE_ENV=production REACT_APP_ENV=sit webpack --config webpack/webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
   },
   "author": "",
   "license": "ISC",
