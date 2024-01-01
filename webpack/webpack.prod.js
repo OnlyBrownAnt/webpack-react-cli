@@ -17,7 +17,15 @@ module.exports = merge(common, {
         test: /\.(css|less)$/,
         use: [
           MiniCssExtractPlugin.loader, // 生产模式使用 MiniCssExtractPlugin.loader 代替 style-loader
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: "[hash:base64]"
+              }
+            }
+          },
           {
             loader: "postcss-loader",
             options: {

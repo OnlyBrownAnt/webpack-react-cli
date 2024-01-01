@@ -25,7 +25,15 @@ module.exports = merge(common, {
         test: /\.(css|less)$/,
         use: [
           "style-loader",
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: "[path][name]__[local]"
+              },
+            },
+          },
           {
             loader: "postcss-loader",
             // 它可以帮助我们将一些现代的 CSS 特性，转成大多数浏览器认识的 CSS，并且会根据目标浏览器或运行时环境添加所需的 polyfill；
