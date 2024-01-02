@@ -4,7 +4,6 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const TerserPlugin = require("terser-webpack-plugin")
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
@@ -38,8 +37,15 @@ module.exports = merge(common, {
           },
           "less-loader",
         ],
-        // 排除 node_modules 目录
-        exclude: /node_modules/,
+        // exclude 排除 node_modules 目录
+        // exclude: /node_modules/,
+        // include 引入符合以下任何条件的模块
+        include: [
+          path.join(__dirname, '../src'), 
+          path.join(__dirname, '../public'),
+          // react-pdf 需要引入的css资源的路径
+          path.join(__dirname, '../node_modules/react-pdf')
+        ],
       },
     ],
   },
@@ -73,18 +79,6 @@ module.exports = merge(common, {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "static/css/[name].[contenthash:8].css", // 将css单独提测出来放在assets/css 下
-    }),
-    // 打包时拷贝public静态文件
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, '../public'),
-          to: path.resolve(__dirname, '../dist'),
-          globOptions: {
-            ignore: ['**/index.html'],
-          },
-        },
-      ],
     }),
     new WebpackManifestPlugin({
       fileName: 'asset-manifest.json',

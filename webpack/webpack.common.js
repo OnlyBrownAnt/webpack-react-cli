@@ -1,12 +1,21 @@
 // webpack.common.js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack')
 
 // 配置业务环境变量
 require('dotenv').config({
   path: `.env.${process.env.REACT_APP_ENV}`
 })
+
+// react-pdf cmaps 资源拷贝处理
+const cMapsDir = path.join(path.dirname(require.resolve('pdfjs-dist/package.json')), 'cmaps');
+// react-pdf fonts 资源拷贝处理
+const standardFontsDir = path.join(
+  path.dirname(require.resolve('pdfjs-dist/package.json')),
+  'standard_fonts',
+);
 
 module.exports = {
   entry: path.resolve(__dirname, "../src/index.tsx"),
@@ -38,7 +47,7 @@ module.exports = {
                   "iOS 9, Android 4.4, last 2 versions, > 0.2%, not dead", // 根据项目去配置
                   // 如果我们将参数项改成false，那么就不会对ES6模块化进行更改，还是使用import引入模块。使用ES6模块化语法有什么好处呢。在使用Webpack一类的打包工具，可以进行静态分析，从而可以做tree shaking 等优化措施。
                   modules: false,
-                  useBuiltIns: "usage", // 会根据配置的目标环境找出需要的polyfill进行部分引入
+                  useBuiltIns: "usage", // 该选项配置如何@babel/preset-env处理polyfills
                   corejs: 3, // 使用 core-js@3 版本
                 },
               ],
@@ -73,6 +82,13 @@ module.exports = {
           filename: "static/fonts/[name].[contenthash:8][ext]",
         },
       },
+      {
+        test: /\.(pdf)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "static/pdf/[name][ext]",
+        },
+      },
     ],
   },
   plugins: [
@@ -84,6 +100,22 @@ module.exports = {
       publicPath: process.env.REACT_APP_PUBLIC_URL,
       favicon: path.resolve(__dirname, '../public/favicon.ico'),
       template: path.resolve(__dirname, "../public/index.html"), // 使用自定义模板
+    }),
+    // 拷贝资源文件
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../public'),
+          to: path.resolve(__dirname, '../dist'),
+          globOptions: {
+            ignore: ['**/index.html'],
+          },
+        },
+        // react-pdf cmaps 资源拷贝处理
+        { from: cMapsDir, to: 'cmaps/' },
+        // react-pdf fonts 资源拷贝处理
+        { from: standardFontsDir, to: 'standard_fonts/' },
+      ],
     }),
   ],
 };

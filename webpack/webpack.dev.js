@@ -1,4 +1,5 @@
 // webpack.dev.js
+const path = require("path");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 
@@ -46,8 +47,15 @@ module.exports = merge(common, {
           },
           "less-loader",
         ],
-        // 排除 node_modules 目录
-        exclude: /node_modules/,
+        // exclude 排除 node_modules 目录
+        // exclude: /node_modules/,
+        // include 引入符合以下任何条件的模块
+        include: [
+          path.join(__dirname, '../src'), 
+          path.join(__dirname, '../public'),
+          // react-pdf 需要引入的css资源的路径
+          path.join(__dirname, '../node_modules/react-pdf')
+        ],
       },
     ],
   },

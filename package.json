@@ -15,8 +15,10 @@
   "dependencies": {
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "core-js": "^3.35.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-pdf": "^7.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
