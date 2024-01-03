@@ -55,6 +55,7 @@ module.exports = merge(common, {
           path.join(__dirname, '../public'),
           // react-pdf 需要引入的css资源的路径
           path.join(__dirname, '../node_modules/react-pdf'),
+          // react-resizable 需要引入的css资源的路径 
           path.join(__dirname, '../node_modules/react-resizable')
         ],
       },
