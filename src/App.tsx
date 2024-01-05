@@ -1,25 +1,51 @@
-import * as React from 'react'
-import './index.less'
-
-import CSSModule from './pages/CSSModule/CSSModule';
-import PDFView from './pages/PDFView/PDFView';
-import ResizableDemo from './pages/ResizableDemo';
-import EChartsDemo from './pages/EChartsDemo';
-
+import React, { useEffect } from 'react'
 import { Provider } from 'react-redux';
 import store from '@/store/store';
-import ReduxDemo from './pages/ReduxDemo';
+import { useNavigate, Link, Outlet, ScrollRestoration } from 'react-router-dom';
+import ErrorBoundary from './pages/ErrorBoundary';
 
-const App: React.FC = () => { 
-  return <>
-    <Provider store={store}>
-      {/* <CSSModule></CSSModule> */}
-      {/* <PDFView></PDFView> */}
-      {/* <ResizableDemo></ResizableDemo> */}
-      {/* <EChartsDemo></EChartsDemo>  */}
-      <ReduxDemo></ReduxDemo>
-    </Provider>
-  </>
+const App: React.FC = () => {
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    window.addEventListener('error', function(event) {
+      console.warn('error', event);
+    })
+    window.addEventListener('unhandledrejection', function(event) {
+      console.warn('unhandledrejection', event);
+    });
+  }, [])
+  return (<>
+    <Link to="/" replace={true}>back home link</Link>
+    <button onClick={() => {navigate("/css-module")}}>css-module</button>
+    <Outlet/>
+  </>);
 }
 
-export default App;
+const ReduxProvider: React.FC = () => {
+  return (
+    <Provider store={store}>
+      <App/>
+      <ScrollRestoration
+        getKey={(location, matches) => {
+          const paths: string | string[] = [];
+          return paths.includes(location.pathname)
+            ? // home and notifications restore by pathname
+              location.pathname
+            : // everything else by location like the browser
+              location.key;
+        }}
+      />
+    </Provider>
+  )
+}
+
+const ErrorBoundaryProvider: React.FC = () => {
+  return (
+    <ErrorBoundary>
+      <ReduxProvider />
+    </ErrorBoundary>
+  )
+}
+
+export default ErrorBoundaryProvider;

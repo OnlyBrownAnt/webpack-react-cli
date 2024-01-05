@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { number } from 'echarts';
 
 const counterSlice = createSlice({
     name: 'counter',

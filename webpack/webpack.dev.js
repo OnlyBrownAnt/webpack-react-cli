@@ -9,6 +9,7 @@ module.exports = merge(common, {
   devServer: {
     open: true, // 编译完自动打开浏览器
     hot: true,
+    historyApiFallback: true,
     port: 8081,
     proxy: {
       '/api': {
