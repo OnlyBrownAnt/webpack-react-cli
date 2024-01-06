@@ -13,6 +13,15 @@ const App: React.FC = () => {
     })
     window.addEventListener('unhandledrejection', function(event) {
       console.warn('unhandledrejection', event);
+
+      if (event.reason.code == 10004) {
+        // TODO 登陆失效处理
+        navigate('/', { replace: true })
+      } else if (event.reason.code == 10005) {
+        // TODO 刷新 Access Token 和 重试请求队列 场景
+        // refreshToken 失效处理
+        navigate('/', { replace: true }) 
+      }
     });
   }, [])
   return (<>
