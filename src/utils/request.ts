@@ -93,6 +93,8 @@ requestInstance.interceptors.request.use(
   config => {
     const configTemp = config as RequestConfig;
     configTemp.options = Object.assign(defaultOptions, configTemp.options);
+    configTemp.headers.token = getAccessToken(); 
+
     return configTemp;
   },
   error => {
@@ -139,8 +141,10 @@ requestInstance.interceptors.response.use(
             refreshTokenLock = false;
             refreshToken().then(res => {
               const token = res.data.token;
+              setAccessToken(token);
+
               // 重试请求队列
-              pendingRequests.map((callback: Function) => callback(token));
+              pendingRequests.map((callback: Function) => callback());
               pendingRequests.splice(0);
               refreshTokenLock = true;
             }).catch(error => {
@@ -151,9 +155,11 @@ requestInstance.interceptors.response.use(
           } else {
             // 缓存待重试请求队列。返回 Promise() 实现一直等待执行效果。
             return new Promise((resolve) => {
-              pendingRequests.push(() => {
-                resolve(requestInstance(response.config))
-              })
+              pendingRequests.push(
+                () => {
+                  resolve(requestInstance(response.config))
+                }
+              )
             })
           }
         }
@@ -229,6 +235,14 @@ requestInstance.interceptors.response.use(
 const getAccessToken = (): string => {
   const token = window.localStorage.getItem('token');
   return token ?? "";
+}
+
+/**
+ * 设置最新的 Access Token
+ * @returns 
+ */
+const setAccessToken = (token) => {
+  window.localStorage.setItem('token', token);
 }
 
 /**
