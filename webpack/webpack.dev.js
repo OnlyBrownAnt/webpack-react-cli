@@ -12,13 +12,13 @@ module.exports = merge(common, {
     historyApiFallback: true,
     port: 8081,
     proxy: {
-      '/api': {
+      "/api": {
         target: process.env.REACT_APP_BASE_URL_PROXY,
-        pathRewrite: { '^/api': '' },
+        pathRewrite: { "^/api": "" },
         secure: false,
         changeOrigin: true,
-      }
-    }
+      },
+    },
   },
   module: {
     rules: [
@@ -32,7 +32,7 @@ module.exports = merge(common, {
             options: {
               modules: {
                 auto: true,
-                localIdentName: "[path][name]__[local]"
+                localIdentName: "[path][name]__[local]",
               },
             },
           },
@@ -52,12 +52,14 @@ module.exports = merge(common, {
         // exclude: /node_modules/,
         // include 引入符合以下任何条件的模块
         include: [
-          path.join(__dirname, '../src'), 
-          path.join(__dirname, '../public'),
+          path.join(__dirname, "../src"),
+          path.join(__dirname, "../public"),
           // react-pdf 需要引入的css资源的路径
-          path.join(__dirname, '../node_modules/react-pdf'),
-          // react-resizable 需要引入的css资源的路径 
-          path.join(__dirname, '../node_modules/react-resizable')
+          path.join(__dirname, "../node_modules/react-pdf"),
+          // react-resizable 需要引入的css资源的路径
+          path.join(__dirname, "../node_modules/react-resizable"),
+          // @toast-ui/react-calendar
+          path.join(__dirname, "../node_modules/@toast-ui/calendar"),
         ],
       },
     ],

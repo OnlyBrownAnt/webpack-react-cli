@@ -4,8 +4,8 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin")
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = merge(common, {
   mode: "production", // 生产模式
@@ -21,9 +21,9 @@ module.exports = merge(common, {
             options: {
               modules: {
                 auto: true,
-                localIdentName: "[hash:base64]"
-              }
-            }
+                localIdentName: "[hash:base64]",
+              },
+            },
           },
           {
             loader: "postcss-loader",
@@ -41,12 +41,14 @@ module.exports = merge(common, {
         // exclude: /node_modules/,
         // include 引入符合以下任何条件的模块
         include: [
-          path.join(__dirname, '../src'), 
-          path.join(__dirname, '../public'),
+          path.join(__dirname, "../src"),
+          path.join(__dirname, "../public"),
           // react-pdf 需要引入的css资源的路径
-          path.join(__dirname, '../node_modules/react-pdf'),
-          // react-resizable 需要引入的css资源的路径 
-          path.join(__dirname, '../node_modules/react-resizable')
+          path.join(__dirname, "../node_modules/react-pdf"),
+          // react-resizable 需要引入的css资源的路径
+          path.join(__dirname, "../node_modules/react-resizable"),
+          // @toast-ui/react-calendar
+          path.join(__dirname, "../node_modules/@toast-ui/calendar"),
         ],
       },
     ],
@@ -65,7 +67,7 @@ module.exports = merge(common, {
           compress: {
             drop_console: false,
             drop_debugger: true,
-            pure_funcs: ['console.log'] // 移除指定函数
+            pure_funcs: ["console.log"], // 移除指定函数
           },
           format: {
             comments: false,
@@ -83,8 +85,8 @@ module.exports = merge(common, {
       filename: "static/css/[name].[contenthash:8].css", // 将css单独提测出来放在assets/css 下
     }),
     new WebpackManifestPlugin({
-      fileName: 'asset-manifest.json',
-      publicPath: process.env.REACT_APP_PUBLIC_URL
-    })
+      fileName: "asset-manifest.json",
+      publicPath: process.env.REACT_APP_PUBLIC_URL,
+    }),
   ],
 });
