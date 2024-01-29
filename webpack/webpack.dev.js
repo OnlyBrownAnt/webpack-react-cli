@@ -12,9 +12,9 @@ module.exports = merge(common, {
     historyApiFallback: true,
     port: 8081,
     proxy: {
-      "/api": {
+      "/api/dev": {
         target: process.env.REACT_APP_BASE_URL_PROXY,
-        pathRewrite: { "^/api": "" },
+        pathRewrite: { "^/api/dev": "" },
         secure: false,
         changeOrigin: true,
       },
