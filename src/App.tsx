@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 import { useNavigate, Link, Outlet, ScrollRestoration } from "react-router-dom";
 import ErrorBoundary from "./pages/ErrorBoundary";
+import ThemeModeProvider from "./theme/theme";
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -43,6 +44,13 @@ const App: React.FC = () => {
       >
         task-calendar
       </button>
+      <button
+        onClick={() => {
+          navigate("/theme-demo");
+        }}
+      >
+        theme-demo
+      </button>
       <Outlet />
     </>
   );
@@ -74,4 +82,12 @@ const ErrorBoundaryProvider: React.FC = () => {
   );
 };
 
-export default ErrorBoundaryProvider;
+const ThemeProvider: React.FC = () => {
+  return (
+    <ThemeModeProvider>
+      <ErrorBoundaryProvider />
+    </ThemeModeProvider>
+  );
+};
+
+export default ThemeProvider;

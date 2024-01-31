@@ -6,6 +6,7 @@ import ReduxDemo from "@/pages/ReduxDemo/index";
 import CSSModule from "@/pages/CSSModule/CSSModule";
 import Error404 from "@/pages/Error404";
 import TaskCalendar from "@/pages/TaskCalendar";
+import ThemeDemo from "@/pages/ThemeDemo";
 
 const router = createBrowserRouter(
   [
@@ -29,6 +30,11 @@ const router = createBrowserRouter(
         {
           path: "/task-calendar",
           element: <TaskCalendar />,
+          children: [],
+        },
+        {
+          path: "/theme-demo",
+          element: <ThemeDemo />,
           children: [],
         },
       ],
