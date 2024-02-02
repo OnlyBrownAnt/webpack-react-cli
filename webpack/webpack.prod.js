@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 // webpack.prod.js
 const path = require("path");
 const { merge } = require("webpack-merge");
