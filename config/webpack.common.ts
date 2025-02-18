@@ -1,5 +1,6 @@
 import path from 'path';
 import { Configuration } from 'webpack';
+import HTMLWebpackPlugin from 'html-webpack-plugin'
 
 const config: Configuration = {
   entry: './src/main.tsx',
@@ -9,15 +10,15 @@ const config: Configuration = {
     clean: true
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+    extensions: ['.mjs', '.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
-      "@": ["./src"]
+      "@": path.resolve(__dirname, '../src')
     }
   },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(m?js|jsx?|tsx?)$/,
         use: [
           {
             loader: 'babel-loader',
@@ -30,6 +31,14 @@ const config: Configuration = {
       }
     ]
   },
+  plugins: [
+    new HTMLWebpackPlugin({
+      title: "Webpack React Project",
+      publicPath: "./",
+      favicon: path.resolve(__dirname, "../public/favicon.ico"),
+      template: path.resolve(__dirname, "../public/index.html")
+    })
+  ]
 }
 
 export default config;

@@ -13,10 +13,10 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
     historyApiFallback: true,
     proxy: [
       {
-        context: ['/api/dev'],
+        context: ['/api'],
         target: 'http://example.com',
         changeOrigin: true,
-        pathRewrite: { '^/api/dev': '' }
+        pathRewrite: { '^/api': '' }
       }
     ]
   }
