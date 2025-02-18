@@ -1,3 +1,8 @@
-.tip {
+/* 使用 CSS 新特性和需要添加前缀的属性 */
+.example {
   color: green;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  user-select: none;
+  transition: all 0.3s ease;
 }

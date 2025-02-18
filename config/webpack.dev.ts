@@ -6,6 +6,18 @@ import Common from "./webpack.common";
 const config: Configuration & { devServer?: DevServerConfiguration } = {
   mode: "development",
   devtool: "eval-cheap-module-source-map",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "postcss-loader"
+        ]
+      }
+    ]
+  },
   devServer: {
     open: true,
     hot: true,
