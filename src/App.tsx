@@ -1,8 +1,9 @@
 import React from 'react';
+import "@/App.css";
 
 const App: React.FC = () => {
   return (
-    <div>Hello React {add(1, 2)} </div>
+    <div className="tip">Hello React {add(1, 2)} </div>
   )
 }
 

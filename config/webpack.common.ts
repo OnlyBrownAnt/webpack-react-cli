@@ -28,7 +28,27 @@ const config: Configuration = {
           }
         ],
         exclude: /node_modules/
-      }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          "style-loader",
+          "css-loader"
+        ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024, // 8kb
+          },
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
+      },
     ]
   },
   plugins: [
