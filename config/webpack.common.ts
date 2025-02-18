@@ -17,10 +17,13 @@ const config: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
         use: [
           {
-            loader: 'ts-loader',
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true
+            }
           }
         ],
         exclude: /node_modules/
