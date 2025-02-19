@@ -1,6 +1,6 @@
-import { merge } from 'webpack-merge'
-import { Configuration } from 'webpack';
-import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
+import { merge } from "webpack-merge";
+import { Configuration } from "webpack";
+import { Configuration as DevServerConfiguration } from "webpack-dev-server";
 import Common from "./webpack.common";
 
 const config: Configuration & { devServer?: DevServerConfiguration } = {
@@ -10,13 +10,9 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          "style-loader",
-          "css-loader",
-          "postcss-loader"
-        ]
-      }
-    ]
+        use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+    ],
   },
   devServer: {
     open: true,
@@ -25,13 +21,13 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
     historyApiFallback: true,
     proxy: [
       {
-        context: ['/api'],
-        target: 'http://example.com',
+        context: ["/api"],
+        target: "http://example.com",
         changeOrigin: true,
-        pathRewrite: { '^/api': '' }
-      }
-    ]
-  }
-}
+        pathRewrite: { "^/api": "" },
+      },
+    ],
+  },
+};
 
-export default merge(Common, config)
+export default merge(Common, config);
