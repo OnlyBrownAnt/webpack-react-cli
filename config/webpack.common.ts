@@ -1,6 +1,11 @@
 import path from "path";
 import { Configuration } from "webpack";
 import HTMLWebpackPlugin from "html-webpack-plugin";
+import CopyWebpackPlugin from "copy-webpack-plugin";
+import Dotenv from "dotenv";
+import DotenvWebpack from "dotenv-webpack";
+
+Dotenv.config({ path: `.env.${process.env.APP_ENV}` });
 
 const config: Configuration = {
   entry: "./src/main.tsx",
@@ -47,9 +52,23 @@ const config: Configuration = {
   plugins: [
     new HTMLWebpackPlugin({
       title: "Webpack React Project",
-      publicPath: "./",
+      publicPath: process.env.APP_PUBLIC_URL,
       favicon: path.resolve(__dirname, "../public/favicon.ico"),
       template: path.resolve(__dirname, "../public/index.html"),
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "../public/"),
+          to: path.resolve(__dirname, "../dist/"),
+          globOptions: {
+            ignore: [path.resolve(__dirname, "../public/index.html")],
+          },
+        },
+      ],
+    }),
+    new DotenvWebpack({
+      path: `.env.${process.env.APP_ENV}`,
     }),
   ],
 };

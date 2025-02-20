@@ -10,7 +10,19 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true,
+                localIdentName: "[path][name]__[local]",
+              },
+            },
+          },
+          "postcss-loader",
+        ],
       },
     ],
   },
@@ -22,7 +34,7 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
     proxy: [
       {
         context: ["/api"],
-        target: "http://example.com",
+        target: process.env.APP_BASE_URL_PROXY,
         changeOrigin: true,
         pathRewrite: { "^/api": "" },
       },
