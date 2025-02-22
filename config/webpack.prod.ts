@@ -20,6 +20,8 @@ const config: Configuration = {
               modules: {
                 auto: true,
                 localIdentName: "[hash:base64]",
+                namedExport: false,
+                exportLocalsConvention: "camelCase",
               },
             },
           },
