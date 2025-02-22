@@ -1,8 +1,10 @@
 import React from "react";
 import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import App from "@/App";
-import Home from "@/pages/home/Home";
+
 import Error404 from "@/pages/error404/Error404";
+import Home from "@/pages/home/Home";
+import ReduxDemo from "@/pages/reduxDemo/ReduxDemo";
 
 const RootRouteComponent: React.FC = () => {
   return (
@@ -30,6 +32,10 @@ const router = createBrowserRouter(
         {
           path: "/home",
           element: <Home />,
+        },
+        {
+          path: "/redux",
+          element: <ReduxDemo />,
         },
       ],
     },

@@ -1,6 +1,10 @@
-/* Error404.module.css */
+/* Home.module.css */
 
 .title {
   height: 1200px;
   color: green;
+}
+
+.link {
+  color: red;
 }
