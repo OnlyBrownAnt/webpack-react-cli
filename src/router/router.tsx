@@ -1,10 +1,10 @@
 import React from "react";
 import { createBrowserRouter, ScrollRestoration } from "react-router-dom";
 import App from "@/App";
-
 import Error404 from "@/pages/error404/Error404";
 import Home from "@/pages/home/Home";
 import ReduxDemo from "@/pages/reduxDemo/ReduxDemo";
+import PDFView from "@/pages/pdfView/PDFView";
 
 const RootRouteComponent: React.FC = () => {
   return (
@@ -36,6 +36,10 @@ const router = createBrowserRouter(
         {
           path: "/redux",
           element: <ReduxDemo />,
+        },
+        {
+          path: "/pdfview",
+          element: <PDFView />,
         },
       ],
     },

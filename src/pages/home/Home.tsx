@@ -7,6 +7,9 @@ const Home: React.FC = () => {
       <Link className={S.link} to="/redux">
         redux demo
       </Link>
+      <Link className={S.link} to="/pdfview">
+        redux demo
+      </Link>
     </div>
   );
 };
