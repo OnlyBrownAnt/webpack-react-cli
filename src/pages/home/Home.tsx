@@ -7,8 +7,13 @@ const Home: React.FC = () => {
       <Link className={S.link} to="/redux">
         redux demo
       </Link>
+      <br />
       <Link className={S.link} to="/pdfview">
-        redux demo
+        pdf view
+      </Link>
+      <br />
+      <Link className={S.link} to="/lpr">
+        lpr
       </Link>
     </div>
   );

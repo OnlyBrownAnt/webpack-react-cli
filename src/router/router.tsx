@@ -5,6 +5,7 @@ import Error404 from "@/pages/error404/Error404";
 import Home from "@/pages/home/Home";
 import ReduxDemo from "@/pages/reduxDemo/ReduxDemo";
 import PDFView from "@/pages/pdfView/PDFView";
+import LPR from "@/pages/lpr/lpr";
 
 const RootRouteComponent: React.FC = () => {
   return (
@@ -40,6 +41,10 @@ const router = createBrowserRouter(
         {
           path: "/pdfview",
           element: <PDFView />,
+        },
+        {
+          path: "/lpr",
+          element: <LPR />,
         },
       ],
     },
