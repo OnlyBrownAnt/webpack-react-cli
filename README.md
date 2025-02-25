@@ -21,3 +21,10 @@
 - 代码（JS、CSS）压缩
 - 代码拆分
 - CSS 模块化
+
+## 集成 React 生态
+
+- react-router
+- redux
+- react-pdf
+- echarts
