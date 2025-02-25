@@ -18,6 +18,8 @@ const config: Configuration & { devServer?: DevServerConfiguration } = {
               modules: {
                 auto: true,
                 localIdentName: "[path][name]__[local]",
+                namedExport: false,
+                exportLocalsConvention: "camelCase",
               },
             },
           },

@@ -1,12 +1,12 @@
 import React from "react";
-import * as S from "@/App.module.css";
+import { Outlet } from "react-router-dom";
 
 const App: React.FC = () => {
-  return <div className={S.example}>Hello React {add(1, 2)} </div>;
-};
-
-const add = (a: number, b: number) => {
-  return a + b;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };
 
 export default App;

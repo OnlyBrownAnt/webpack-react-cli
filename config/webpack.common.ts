@@ -7,6 +7,13 @@ import DotenvWebpack from "dotenv-webpack";
 
 Dotenv.config({ path: `.env.${process.env.APP_ENV}` });
 
+// react-pdf 根路径
+const pdfjsDistPath = path.dirname(require.resolve("pdfjs-dist/package.json"));
+// react-pdf cmaps
+const cMapsDir = path.join(pdfjsDistPath, "cmaps");
+// react-pdf fonts
+const standardFontsDir = path.join(pdfjsDistPath, "standard_fonts");
+
 const config: Configuration = {
   entry: "./src/main.tsx",
   output: {
@@ -47,6 +54,13 @@ const config: Configuration = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
       },
+      {
+        test: /\.(pdf)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "static/pdf/[name][ext]",
+        },
+      },
     ],
   },
   plugins: [
@@ -65,6 +79,10 @@ const config: Configuration = {
             ignore: [path.resolve(__dirname, "../public/index.html")],
           },
         },
+        // react-pdf cmaps 资源拷贝处理
+        { from: cMapsDir, to: "cmaps/" },
+        // react-pdf fonts 资源拷贝处理
+        { from: standardFontsDir, to: "standard_fonts/" },
       ],
     }),
     new DotenvWebpack({
